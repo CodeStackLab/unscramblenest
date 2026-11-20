@@ -1,0 +1,30 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: unscramblenest-preview:latest
+    container_name: unscramblenest-preview
+    restart: unless-stopped
+    networks:
+      - coolify
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=coolify"
+      - "traefik.http.routers.preview-unscramble-http.entryPoints=http"
+      - "traefik.http.routers.preview-unscramble-http.rule=Host(`preview.unscramblenest.com`)"
+      - "traefik.http.routers.preview-unscramble-http.middlewares=preview-redirect-to-https"
+      - "traefik.http.middlewares.preview-redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.preview-unscramble-https.entryPoints=https"
+      - "traefik.http.routers.preview-unscramble-https.rule=Host(`preview.unscramblenest.com`)"
+      - "traefik.http.routers.preview-unscramble-https.tls=true"
+      - "traefik.http.routers.preview-unscramble-https.tls.certresolver=letsencrypt"
+      - "traefik.http.services.preview-unscramble-https.loadbalancer.server.port=3000"
+
+networks:
+  coolify:
+    external: true

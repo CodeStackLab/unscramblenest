@@ -1,0 +1,52 @@
+Dictionary source & license notice
+==================================
+
+Unscramblenest bundles the file "words_alpha.txt" from the dwyl/english-words
+project on GitHub:
+
+    https://github.com/dwyl/english-words
+
+Source
+------
+The dwyl/english-words project compiled this word list from publicly available
+sources and distributes it as a plain text file. The project's README notes that
+the underlying word data traces to publicly available English word lists
+(including the public-domain Moby word lists compiled by Grady Ward) and that
+"Copyright still belongs to them" — referring to those original sources.
+
+License
+-------
+The dwyl/english-words repository includes a LICENSE.md file at its root. That
+file is an Unlicense dedication — a relinquishment of the repository's copyright
+interest to the public domain. Its text states:
+
+  "This is free and unencumbered software released into the public domain.
+   Anyone is free to copy, modify, publish, use, compile, sell, or distribute
+   this software, either in source code form or as a compiled binary, for any
+   purpose, commercial or non-commercial, and by any means."
+
+The full dedication is published at https://unlicense.org/.
+
+What this means for Unscramblenest
+----------------------------------
+Under the Unlicense, the repository's contents — including words_alpha.txt —
+may be copied, modified, distributed, and used commercially. Commercial
+redistribution of the bundled word list is therefore permitted by the license
+that dwyl/english-words applies to its repository.
+
+Unscramblenest is not affiliated with the dwyl/english-words project. The word
+list is bundled here unchanged (filtered at search time to entries of 15 letters
+or fewer) for offline, in-browser matching. All credit for compiling and
+maintaining the list belongs to the dwyl/english-words project and the original
+sources it drew from. We provide attribution to dwyl/english-words as the
+source. Changes upstream do not automatically change the list bundled here.
+
+No warranty
+-----------
+The word list is provided "as is", without warranty of any kind. The list is
+broad rather than curated for any particular word game. It may contain rare,
+dated, or specialist terms and may omit words you know. A match in this tool is
+a dictionary entry, not a guarantee that any official word game (Scrabble, Words
+With Friends, Wordle, Wordfeud, or any other) will accept the word. Always
+confirm words against your game's own official dictionary and rules.
+

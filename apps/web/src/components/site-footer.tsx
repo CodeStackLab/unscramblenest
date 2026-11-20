@@ -1,0 +1,5 @@
+import { Link } from 'react-router';
+import { openCookiePreferences } from '@/lib/cookie-consent';
+export function SiteFooter() {
+  return <footer className="site-footer"><div className="footer-top"><div><Link className="brand" to="/">Unscramblenest.</Link><p>A little clarity for a jumble of letters.</p><p className="footer-email"><a href="mailto:support@unscramblenest.com">support@unscramblenest.com</a></p></div><nav aria-label="Footer navigation"><Link to="/about">About</Link><Link to="/dictionary">Dictionary</Link><Link to="/contact">Contact</Link><Link to="/privacy-policy">Privacy policy</Link><Link to="/terms-of-use">Terms of use</Link><button onClick={openCookiePreferences}>Cookie settings</button></nav></div><div className="footer-bottom"><span>© 2026 Unscramblenest</span><span>Dictionary: <a href="https://github.com/dwyl/english-words" target="_blank" rel="noreferrer">dwyl/english-words</a> · <a href="/dictionary-license.txt">Source &amp; license notice</a></span></div></footer>;
+}
