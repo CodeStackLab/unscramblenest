@@ -668,7 +668,7 @@ export const blogPosts: BlogPost[] = [
       buttonText: 'Solve 7-Letter Bingos Now',
       url: '/word-unscrambler-with-blanks',
     },
-  },,
+  },
   {
     slug: "essential-2-letter-words-scrabble-guide",
     title: "The Complete Guide to 2-Letter Words in Scrabble (All 107 Words and How to Play Them)",
