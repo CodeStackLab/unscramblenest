@@ -40,8 +40,8 @@ export function HomeContent() {
             <article key={post.slug} className="blog-card">
               <Link to={`/blog/${post.slug}`} className="card-image-link" tabIndex={-1} aria-hidden="true">
                 <img
-                  src={post.featuredImage}
-                  alt={post.imageAlt || post.title}
+                  src={post.heroImage}
+                  alt={post.heroImageAlt || post.title}
                   loading="lazy"
                   width={400}
                   height={250}
