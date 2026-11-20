@@ -6,6 +6,8 @@ export default [
 	route('word-unscrambler-with-blanks', 'routes/word-unscrambler-with-blanks.tsx'),
 	route('5-letter-word-finder', 'routes/five-letter-word-finder.tsx'),
 	route('how-to-unscramble-words', 'routes/how-to-unscramble-words.tsx'),
+	route('blog', 'routes/blog.tsx'),
+	route('blog/:slug', 'routes/blog-post.tsx'),
 	route(':page', 'routes/info.tsx'),
 	route('sitemap.xml', 'routes/sitemap.xml.ts'),
 	route('robots.txt', 'routes/robots.txt.ts'),

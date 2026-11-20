@@ -1,12 +1,13 @@
 import type { Route } from './+types/sitemap.xml';
 import { preferredOrigin } from '@/lib/preferred-origin.server';
+import { getAllBlogPosts } from '@/data/blog-posts';
 
 type SitemapEntry = {
 	path: string;
 	lastmod?: string;
 };
 
-const STATIC_PATHS = ['/', '/anagram-solver', '/word-unscrambler-with-blanks', '/5-letter-word-finder', '/how-to-unscramble-words', '/dictionary', '/about', '/contact', '/privacy-policy', '/terms-of-use'];
+const STATIC_PATHS = ['/', '/anagram-solver', '/word-unscrambler-with-blanks', '/5-letter-word-finder', '/how-to-unscramble-words', '/blog', '/dictionary', '/about', '/contact', '/privacy-policy', '/terms-of-use'];
 // Informational pages are static public content; there are no record collections.
 
 function escapeXml(value: string): string {
@@ -44,7 +45,11 @@ function serializeSitemap(origin: string, entries: SitemapEntry[]): string {
  * again in the same change that removes the collection.
  */
 async function getDynamicEntries(): Promise<SitemapEntry[]> {
-	return [];
+	const posts = getAllBlogPosts();
+	return posts.map(post => ({
+		path: `/blog/${post.slug}`,
+		lastmod: post.dateModified || post.datePublished,
+	}));
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
