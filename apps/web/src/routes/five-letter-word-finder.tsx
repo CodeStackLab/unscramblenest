@@ -1,4 +1,6 @@
 import type { Route } from './+types/five-letter-word-finder';
+import { Link } from 'react-router';
+import { ArrowRight, BookOpen } from 'lucide-react';
 import { seo } from '@/lib/seo';
 import { WordTool } from '@/components/tool/word-tool';
 import { QuickExamples } from '@/components/five-letter/quick-examples';
@@ -59,6 +61,24 @@ export default function FiveLetterPage() {
       <WordTool key="five" mode="five" />
       <QuickExamples />
       <Faq />
+      <section className="home-content" style={{ marginTop: 24, paddingBottom: 24 }}>
+        <div style={{ padding: '24px 28px', background: 'var(--sand)', border: '1px solid #dcd1c2', borderRadius: 8 }}>
+          <h3 style={{ fontFamily: 'Roboto Slab, serif', fontSize: 18, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <BookOpen size={18} color="var(--sepia)" /> 5-Letter Word Strategy Guides
+          </h3>
+          <p style={{ fontSize: 13.5, lineHeight: 1.7, color: 'hsl(var(--muted-foreground))', marginBottom: 14 }}>
+            Explore our expert analysis on letter frequency distributions, Wordle entropy reduction, and tournament word patterns:
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+            <Link to="/blog/mastering-5-letter-words-for-word-games-and-wordle" className="view-all-link">
+              High-Utility 5-Letter Words: Letter Frequency Traps <ArrowRight size={13} />
+            </Link>
+            <Link to="/blog/how-wordle-algorithms-solve-puzzles-in-three-guesses" className="view-all-link">
+              The Information Theory of Wordle & Optimal Openers <ArrowRight size={13} />
+            </Link>
+          </div>
+        </div>
+      </section>
       <ToolNotes />
     </>
   );
