@@ -20,10 +20,15 @@ services:
       - "traefik.http.routers.preview-unscramble-http.middlewares=preview-redirect-to-https"
       - "traefik.http.middlewares.preview-redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.routers.preview-unscramble-https.entryPoints=https"
-      - "traefik.http.routers.preview-unscramble-https.rule=Host(`unscramblenest.com`) || Host(`www.unscramblenest.com`) || Host(`preview.unscramblenest.com`)"
+      - "traefik.http.routers.preview-unscramble-https.rule=Host(`unscramblenest.com`) || Host(`preview.unscramblenest.com`)"
       - "traefik.http.routers.preview-unscramble-https.tls=true"
       - "traefik.http.routers.preview-unscramble-https.tls.certresolver=letsencrypt"
       - "traefik.http.services.preview-unscramble-https.loadbalancer.server.port=3000"
+      - "traefik.http.routers.www-unscramble-https.entryPoints=https"
+      - "traefik.http.routers.www-unscramble-https.rule=Host(`www.unscramblenest.com`)"
+      - "traefik.http.routers.www-unscramble-https.tls=true"
+      - "traefik.http.routers.www-unscramble-https.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.www-unscramble-https.service=preview-unscramble-https"
 
 networks:
   coolify:

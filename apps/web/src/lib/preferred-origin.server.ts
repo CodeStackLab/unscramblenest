@@ -35,6 +35,7 @@ export function preferredOrigin(request: Request): string {
  */
 export function canonicalRedirectUrl(url: URL): string | null {
 	if (url.host !== `www.${PREFERRED_DOMAIN}`) return null;
+	if (url.pathname.startsWith('/.well-known/')) return null;
 
 	return `https://${PREFERRED_DOMAIN}${url.pathname}${url.search}`;
 }
