@@ -18,6 +18,44 @@ import {
 import { seo } from '@/lib/seo';
 import { getBlogPostBySlug, getRelatedPosts } from '@/data/blog-posts';
 
+function renderParagraphWithLinks(text: string) {
+  if (!text || typeof text !== 'string') return text;
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  if (!regex.test(text)) return text;
+
+  const parts: (string | React.ReactNode)[] = [];
+  let lastIndex = 0;
+  regex.lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    const [fullMatch, label, url] = match;
+    if (url.startsWith('/')) {
+      parts.push(
+        <Link key={`${match.index}-${url}`} to={url} className="article-inline-link">
+          {label}
+        </Link>
+      );
+    } else {
+      parts.push(
+        <a key={`${match.index}-${url}`} href={url} target="_blank" rel="noopener noreferrer" className="article-inline-link">
+          {label}
+        </a>
+      );
+    }
+    lastIndex = match.index + fullMatch.length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+}
+
 export function loader({ params }: Route.LoaderArgs) {
   const { slug } = params;
   if (!slug) {
@@ -185,7 +223,7 @@ export default function BlogPostPage({ loaderData }: Route.ComponentProps) {
           <span className="reading-time-pill"><Clock size={12} /> {post.readTime}</span>
         </div>
         <h1>{post.title}</h1>
-        <p className="article-lead">{post.leadSummary}</p>
+        <p className="article-lead">{renderParagraphWithLinks(post.leadSummary)}</p>
 
         <div className="author-bar">
           <div className="author-info">
@@ -274,7 +312,7 @@ export default function BlogPostPage({ loaderData }: Route.ComponentProps) {
               </h2>
 
               {section.content.map((p, pIdx) => (
-                <p key={pIdx}>{p}</p>
+                <p key={pIdx}>{renderParagraphWithLinks(p)}</p>
               ))}
 
               {section.callout && (
@@ -286,7 +324,7 @@ export default function BlogPostPage({ loaderData }: Route.ComponentProps) {
                     {section.callout.type === 'info' && <Info size={17} />}
                     <strong>{section.callout.title}</strong>
                   </div>
-                  <p>{section.callout.text}</p>
+                  <p>{renderParagraphWithLinks(section.callout.text)}</p>
                 </aside>
               )}
 
@@ -320,14 +358,14 @@ export default function BlogPostPage({ loaderData }: Route.ComponentProps) {
                 <div key={sub.id} id={sub.id} className="article-subsection">
                   <h3>{sub.heading}</h3>
                   {sub.content.map((subP, subPIdx) => (
-                    <p key={subPIdx}>{subP}</p>
+                    <p key={subPIdx}>{renderParagraphWithLinks(subP)}</p>
                   ))}
                   {sub.callout && (
                     <aside className={`article-callout callout-${sub.callout.type}`}>
                       <div className="callout-header">
                         <strong>{sub.callout.title}</strong>
                       </div>
-                      <p>{sub.callout.text}</p>
+                      <p>{renderParagraphWithLinks(sub.callout.text)}</p>
                     </aside>
                   )}
                   {sub.table && (
@@ -365,7 +403,7 @@ export default function BlogPostPage({ loaderData }: Route.ComponentProps) {
               </h3>
               <ul>
                 {post.keyTakeaways.map((item, idx) => (
-                  <li key={idx}>{item}</li>
+                  <li key={idx}>{renderParagraphWithLinks(item)}</li>
                 ))}
               </ul>
             </section>
@@ -383,7 +421,7 @@ export default function BlogPostPage({ loaderData }: Route.ComponentProps) {
                     <h4>
                       <HelpCircle size={15} /> {faq.question}
                     </h4>
-                    <p>{faq.answer}</p>
+                    <p>{renderParagraphWithLinks(faq.answer)}</p>
                   </div>
                 ))}
               </div>

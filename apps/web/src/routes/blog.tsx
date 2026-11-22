@@ -4,21 +4,47 @@ import { ArrowLeft, ArrowRight, BookOpen, Clock, Calendar, User, Sparkles } from
 import { seo } from '@/lib/seo';
 import { getAllBlogPosts } from '@/data/blog-posts';
 
-export function loader(_args: Route.LoaderArgs) {
-  const posts = getAllBlogPosts();
-  return { posts };
+export function loader({ request }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+  const pageParam = parseInt(url.searchParams.get('page') || '1', 10);
+  const allPosts = getAllBlogPosts();
+  const totalPosts = allPosts.length;
+  const POSTS_PER_PAGE = 10;
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  const currentPage = Math.max(1, Math.min(isNaN(pageParam) ? 1 : pageParam, totalPages));
+
+  const isFirstPage = currentPage === 1;
+  const featuredPost = isFirstPage ? allPosts[0] : null;
+  const pagePosts = isFirstPage
+    ? allPosts.slice(1, POSTS_PER_PAGE)
+    : allPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
+
+  return {
+    posts: pagePosts,
+    featuredPost,
+    currentPage,
+    totalPages,
+    totalPosts,
+  };
 }
 
 export function meta({ matches, location, loaderData }: Route.MetaArgs) {
   const origin = matches.find(m => m?.id === 'root')?.loaderData ? (matches.find(m => m?.id === 'root')?.loaderData as { origin?: string })?.origin ?? '' : '';
-  const blogUrl = `${origin}/blog`;
-  const posts = loaderData?.posts || [];
+  const currentPage = loaderData?.currentPage || 1;
+  const totalPages = loaderData?.totalPages || 1;
+  const pageSuffix = currentPage > 1 ? ` (Page ${currentPage} of ${totalPages})` : '';
+  const blogUrl = currentPage > 1 ? `${origin}/blog?page=${currentPage}` : `${origin}/blog`;
+  const activePosts = [
+    ...(loaderData?.featuredPost ? [loaderData.featuredPost] : []),
+    ...(loaderData?.posts || []),
+  ];
+  const offset = (currentPage - 1) * 10;
 
   const collectionPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'UnscrambleNest Word Strategy & Anagram Blog',
-    description: 'Expert strategies, anagram solving techniques, Scrabble tile management guides, and vocabulary insights.',
+    name: `UnscrambleNest Word Strategy & Anagram Blog${pageSuffix}`,
+    description: `Expert strategies, anagram solving techniques, Scrabble tile management guides, and vocabulary insights.${pageSuffix}`,
     url: blogUrl,
     isPartOf: {
       '@type': 'WebSite',
@@ -27,9 +53,9 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
     },
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: posts.map((post, index) => ({
+      itemListElement: activePosts.map((post, index) => ({
         '@type': 'ListItem',
-        position: index + 1,
+        position: offset + index + 1,
         url: `${origin}/blog/${post.slug}`,
         name: post.title,
       })),
@@ -49,7 +75,7 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Blog',
+        name: `Blog${pageSuffix}`,
         item: blogUrl,
       },
     ],
@@ -58,9 +84,9 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: 'Word Strategy & Anagram Guides | Unscramblenest Blog',
-      description: 'Master word puzzles, tournament Scrabble tile tactics, anagram solving strategies, and high-scoring vocabulary with in-depth guides from Unscramblenest.',
-      path: '/blog',
+      title: `Word Strategy & Anagram Guides${pageSuffix} | Unscramblenest Blog`,
+      description: `Master word puzzles, tournament Scrabble tile tactics, anagram solving strategies, and high-scoring vocabulary with in-depth guides from Unscramblenest.${pageSuffix}`,
+      path: currentPage > 1 ? `/blog?page=${currentPage}` : '/blog',
       image: 'https://images.unsplash.com/photo-1528747310874-b78b2322ffc4?auto=format&fit=crop&w=1200&q=80',
       type: 'website',
       jsonLd: [collectionPageSchema, breadcrumbsSchema],
@@ -70,8 +96,9 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
 
 export default function BlogIndexPage({ loaderData }: Route.ComponentProps) {
   const posts = loaderData?.posts || [];
-  const featuredPost = posts[0];
-  const remainingPosts = posts.slice(1);
+  const featuredPost = loaderData?.featuredPost;
+  const currentPage = loaderData?.currentPage || 1;
+  const totalPages = loaderData?.totalPages || 1;
 
   return (
     <main className="blog-main">
@@ -128,16 +155,20 @@ export default function BlogIndexPage({ loaderData }: Route.ComponentProps) {
         </section>
       )}
 
-      <section className="blog-grid-section" aria-label="Latest Articles">
+      <section className="blog-grid-section" aria-label="Articles Listing">
         <div className="grid-header">
           <span className="eyebrow">
-            <span className="tiny-rule" /> ALL ARTICLES
+            <span className="tiny-rule" /> {currentPage > 1 ? `PAGE ${currentPage} OF ${totalPages}` : 'ALL ARTICLES'}
           </span>
-          <h2>Tactical Word Guides &amp; Tutorials</h2>
+          <h2>
+            {currentPage > 1
+              ? `Tactical Word Guides & Tutorials (Page ${currentPage})`
+              : 'Tactical Word Guides & Tutorials'}
+          </h2>
         </div>
 
         <div className="blog-grid">
-          {remainingPosts.map(post => (
+          {posts.map(post => (
             <article key={post.slug} className="blog-card">
               <Link to={`/blog/${post.slug}`} className="card-image-link" tabIndex={-1} aria-hidden="true">
                 <img
@@ -169,6 +200,46 @@ export default function BlogIndexPage({ loaderData }: Route.ComponentProps) {
             </article>
           ))}
         </div>
+
+        {totalPages > 1 && (
+          <nav className="blog-pagination" aria-label="Blog pagination">
+            {currentPage > 1 ? (
+              <Link
+                to={`/blog${currentPage === 2 ? '' : `?page=${currentPage - 1}`}`}
+                className="pagination-btn prev"
+              >
+                <ArrowLeft size={15} /> Previous
+              </Link>
+            ) : (
+              <span className="pagination-btn disabled">
+                <ArrowLeft size={15} /> Previous
+              </span>
+            )}
+
+            <div className="pagination-numbers">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                <Link
+                  key={p}
+                  to={`/blog${p === 1 ? '' : `?page=${p}`}`}
+                  className={`page-num ${p === currentPage ? 'active' : ''}`}
+                  aria-current={p === currentPage ? 'page' : undefined}
+                >
+                  {p}
+                </Link>
+              ))}
+            </div>
+
+            {currentPage < totalPages ? (
+              <Link to={`/blog?page=${currentPage + 1}`} className="pagination-btn next">
+                Next <ArrowRight size={15} />
+              </Link>
+            ) : (
+              <span className="pagination-btn disabled">
+                Next <ArrowRight size={15} />
+              </span>
+            )}
+          </nav>
+        )}
       </section>
 
       <section className="blog-cta-banner">

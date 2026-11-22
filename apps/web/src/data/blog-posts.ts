@@ -98,6 +98,7 @@ export const blogPosts: BlogPost[] = [
         id: 'beyond-turn-greed',
         heading: 'Beyond Turn Greed: Why Maximizing Points on Turn 3 Loses the Game on Turn 7',
         content: [
+          "When testing hypothetical blank rack scenarios during post-game review, you can run simulations through our dedicated [Word Unscrambler with Blanks](/word-unscrambler-with-blanks) to identify optimal leave distributions.",
           'In competitive Scrabble, casual players judge the quality of a move solely by the score recorded on the scoresheet. If a player spots a 34-point play that exhausts their high-value letters, they rarely hesitate to place it. Yet, two turns later, they find themselves staring at a catastrophic rack of U-U-I-I-V-W-O, completely unable to form a word longer than three letters or score more than 8 points.',
           'Grandmaster-level word play operates on an entirely different mathematical axiom: Total Move Value = Points on the Board + Rack Leave Equity. The "leave" represents the tiles remaining on your rack after your play, combined with their statistical probability of combining favorably with fresh tiles drawn from the bag.',
           'Consider a typical mid-game crossroad. You hold the letters E-E-I-N-R-S-T. You can place the word "REIN" on a Double Word score for 22 points, leaving the letters E-S-T on your rack. Alternatively, you could play "ENTRIES" for 28 points without triggering a bonus, leaving only an isolated I on your rack. While the second move yields 6 more points immediately, your remaining E-S-T leave carries an expected future equity value of +18.4 points toward forming a 50-point bingo on your very next turn. The 22-point move is statistically superior by more than a dozen net points over two turns.',
@@ -242,6 +243,7 @@ export const blogPosts: BlogPost[] = [
         id: 'neurobiology-of-scrambling',
         heading: 'The Scrambled Brain: Why Jumbled Letters Cause Cognitive Paralysis',
         content: [
+          "To practice mental cluster decomposition against difficult consonant blends, test real-time rack variations with our fast [Anagram Solver](/anagram-solver).",
           'Human reading is predominantly an orthographic and phonological process. When an educated adult looks at the word "GARDEN," the visual cortex does not slowly decode G-A-R-D-E-N letter by letter; rather, it recognizes the familiar visual envelope of the word in approximately 150 milliseconds and invokes its sound profile in the brain’s phonological loop.',
           'However, when those identical letters are presented as an anagram—such as "D-R-A-G-N-E"—the brain’s reading engine malfunctions. The visual system attempts to pronounce the jumble as "drag-nee," anchoring your working memory to a non-existent word. Cognitive scientists call this phenomenon "orthographic fixation."',
           'A seven-letter word contains 7! (5,040) possible mathematical permutations. Attempting to mentally brute-force 5,040 letter arrangements is cognitively impossible. To solve anagrams rapidly, you must replace subconscious phonetic reading with structured, heuristic pattern decomposition.',
@@ -386,6 +388,7 @@ export const blogPosts: BlogPost[] = [
         id: 'two-games-divided',
         heading: 'Same Concept, Different Games: Why Scrabble Masters Struggle in WWF',
         content: [
+          "For a complete breakdown of scoring heuristics and letter frequency distributions across games, explore our comprehensive [Word Unscrambling Guide](/how-to-unscramble-words).",
           'At first glance, Words with Friends (WWF) appears to be nothing more than a smartphone-adapted clone of Alfred Mosher Butts’ classic 1938 board game Scrabble. Both games feature a 15x15 grid of 225 squares, a seven-tile rack, and colored multiplier squares that amplify letter values and word scores.',
           'Yet when experienced Scrabble tournament players transition to Words with Friends, they are frequently baffled by surprising losses against casual mobile gamers. The reason is simple: the underlying mathematical economy and spatial geography of the two games are completely different.',
           'Scrabble rewards patient rack cultivation, conservative board containment, and the long-term pursuit of 50-point "bingo" bonuses. Words with Friends, by contrast, is an aggressive tactical slugfest that penalizes bingo hoarding and showers points upon players who aggressively harvest accessible multiplier squares with short, punchy words.',
@@ -528,6 +531,7 @@ export const blogPosts: BlogPost[] = [
         id: 'the-50-point-engine',
         heading: 'The 50-Point Engine: Why Bingos Win Tournaments',
         content: [
+          "You can quickly verify stem permutations and suffix expansions across any 7-tile rack using our specialized [Anagram Solver](/anagram-solver).",
           'In competitive word gaming, the 50-point bonus awarded for emptying your entire seven-tile rack in a single turn—commonly called a "Bingo" in North America or a "Bonus" internationally—is the single most decisive factor determining match outcomes.',
           'Consider the arithmetic of a typical 14-turn Scrabble game. A solid player averaging 24 points per turn across 14 turns finishes with 336 points. However, if that player transforms just two of those ordinary turns into 7-letter bingos averaging 70 points each (the word score plus the 50-point bonus), their total score immediately surges to 428 points.',
           'Casual players assume that tournament competitors memorize all 100,000+ words in the official dictionary. In reality, master players rely on a much more efficient cognitive framework: 6-Letter Bingo Stems.',
@@ -2066,7 +2070,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Word gaming table and competitive counters",
     heroImagePhotographer: "Sean Do",
     heroImagePhotographerUrl: "https://unsplash.com/@seando",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for speed solving in boggle: eye movement and grid chunking techniques.",
+    excerpt: "Train saccadic eye movements, 3x3 quadrant chunking, and morphological prefix/suffix spotting to find 4- to 8-letter Boggle words in under 3 seconds under tournament time pressure.",
     leadSummary: "Boggle and speed word searches are cognitive sports of ocular dexterity, spatial chunking, and associative lexical search. Discover the systematic scanning grids, visual anchor techniques, and morphological prefix-trees used by speed-solving champions to uncover 50+ words in a standard 3-minute round.",
     author: {
       "name": "Elena Vance",
@@ -2186,7 +2190,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Abstract matrix letters and symbols",
     heroImagePhotographer: "Markus Spiske",
     heroImagePhotographerUrl: "https://unsplash.com/@markusspiske",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for vowel dumps: what to do when your rack is flooded with a, e, and i.",
+    excerpt: "Escape catastrophic 5-vowel rack floods with high-equity dump words like AERIE, OORIE, and MIAOU while preserving valuable consonants for future bingo turns.",
     leadSummary: "Drawing an avalanche of vowels—such as holding A-A-E-E-I-O-U—is one of the most frustrating experiences in competitive word games. Mastering the official dictionary of vowel dumps allows you to purge deadweight letters, score respectable points, and restore championship rack equilibrium in a single move.",
     author: {
       "name": "Marcus Thorne",
@@ -2310,7 +2314,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Letters and typewriter keys in strategic layout",
     heroImagePhotographer: "Florian Klauer",
     heroImagePhotographerUrl: "https://unsplash.com/@florianklauer",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for 8-letter bingos: how to extend existing board words for triple-triple payoffs.",
+    excerpt: "Unlock monstrous 140+ point triple-triple payoffs by mastering front- and back-hook extensions on common 7-letter board words.",
     leadSummary: "While 7-letter bingos are played using only the tiles on your rack, 8-letter bingos require hooking through an existing 'floating' tile on the board. Master tournament players study 8-letter stems systematically because 8-letter plays span two Triple Word Score squares, producing explosive 100+ point turns.",
     author: {
       "name": "Maya Lin",
@@ -2442,7 +2446,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Vintage book pages and lexical definitions",
     heroImagePhotographer: "Patrick Tomasso",
     heroImagePhotographerUrl: "https://unsplash.com/@impatrickt",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for inside word solvers: how trie and dawg data structures search 200,000 words in 2ms.",
+    excerpt: "An architectural deep-dive into Directed Acyclic Word Graphs (DAWG), GADDAG structures, and Trie pruning that power sub-2ms anagram searches across 200,000 words.",
     leadSummary: "How can an algorithm search through an English dictionary of over 270,000 words, evaluate millions of letter permutations, and return ranked legal anagrams in under 2 milliseconds? Step inside the computational architecture of Tries, DAWGs, and GADDAG data structures that power UnscrambleNest.",
     author: {
       "name": "Elena Vance",
@@ -2456,6 +2460,7 @@ export const blogPosts: BlogPost[] = [
         id: "the-permutation-explosion-problem",
         heading: "The Permutation Explosion: Why Brute Force Fails",
         content: [
+          "This exact algorithmic pruning technique powers our client-side [Word Unscrambler](/) to index over 200,000 dictionary entries with sub-millisecond response times.",
           "To understand why specialized algorithms are needed, consider the brute-force approach to unscrambling letters. If a player enters 7 letters into a search engine, the number of possible permutations is given by 7 factorial (7! = 5,040). For 8 letters, it is 40,320. For 10 letters, it exceeds 3.6 million permutations.",
           "If an algorithm generated every single permutation and then checked each one individually against a flat dictionary array, searching a 10-letter rack would require millions of database queries—taking several seconds or crashing the browser.",
           "When you add two blank wildcard tiles (which can each represent any of the 26 letters of the alphabet), the permutation count explodes into the hundreds of millions. High-performance word finders solve this problem using tree-based data structures that prune invalid branches before they are ever generated."
@@ -2568,7 +2573,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Digital communication and mobile devices",
     heroImagePhotographer: "John Schnobrich",
     heroImagePhotographerUrl: "https://unsplash.com/@johnschno",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for scrabble board geography: locking down triple word scores and controlling lanes.",
+    excerpt: "Master board quadrant geometry, lane blocking, and defensive quadrant zoning to deny opponents access to high-multiplier triple-word hotspots.",
     leadSummary: "Scrabble is not merely a spelling contest; it is a tactical territorial war waged across 225 squares. Understanding board geography—quadrant control, multiplier hotspot denial, and the strategic choice between 'open' and 'closed' board states—is what enables masters to control games from turn one.",
     author: {
       "name": "Marcus Thorne",
@@ -2707,7 +2712,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Notebook with calendar and strategy notes",
     heroImagePhotographer: "Biegun Wlodzimierz",
     heroImagePhotographerUrl: "https://unsplash.com/@biegun",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for words with friends 2 tactics: tile swaps, board multipliers, and strategic timing.",
+    excerpt: "Exploit Words with Friends 2 board layout differences, 11x11 perimeter multiplier clusters, and strategic tile swaps to maximize your winning percentage.",
     leadSummary: "While Words with Friends shares superficial similarities with Scrabble, its underlying mathematics, board architecture, tile point values, and power-up mechanics create an entirely different competitive discipline. Discover the key strategic adjustments required to dominate WWF matches.",
     author: {
       "name": "Maya Lin",
@@ -2858,7 +2863,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Word gaming table and competitive counters",
     heroImagePhotographer: "Sean Do",
     heroImagePhotographerUrl: "https://unsplash.com/@seando",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for cognitive chunking: how the human brain unscrambles anagrams using phonetics.",
+    excerpt: "Discover how cognitive working memory chunking, phonotactic constraints, and syllable decomposition let the human brain rapidly solve complex anagrams.",
     leadSummary: "When confronted with a jumble of 8, 9, or 10 scrambled letters, human working memory quickly becomes overwhelmed by the millions of factorial permutations. Phonics-based syllable chunking and morphological decomposition provide the cognitive scaffolding needed to solve complex anagrams in seconds.",
     author: {
       "name": "Elena Vance",
@@ -2981,7 +2986,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Abstract matrix letters and symbols",
     heroImagePhotographer: "Markus Spiske",
     heroImagePhotographerUrl: "https://unsplash.com/@markusspiske",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for the battle of lexicons: twl vs csw, collins, and official word additions.",
+    excerpt: "Understand the critical rulebook differences between North American NASPA TWL06 and international Collins CSW21 lexicons to prevent costly challenge penalties.",
     leadSummary: "The words permitted on a Scrabble board have sparked passionate debates, boycotts, and schisms across eight decades. Trace the fascinating evolution of competitive word lists—from Alfred Butts' original 1930s dictionary to the modern battle between North America's NASPA TWL and the international Collins Scrabble Words (CSW) lexicon.",
     author: {
       "name": "Marcus Thorne",
@@ -3126,7 +3131,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Letters and typewriter keys in strategic layout",
     heroImagePhotographer: "Florian Klauer",
     heroImagePhotographerUrl: "https://unsplash.com/@florianklauer",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for compound words in word games: hyphenation, solid words, and game eligibility.",
+    excerpt: "Navigate tricky solid closed compounds versus hyphenated open phrases to legally play high-scoring compound words without triggering a challenge.",
     leadSummary: "Compound words and blended portmanteaus represent the fastest-growing frontier in tournament lexicons. Discover how closed compounds, affix fusions, and modern lexical blends allow savvy players to construct unexpected 7- and 8-letter bingos across competitive word boards.",
     author: {
       "name": "Maya Lin",
@@ -3250,7 +3255,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Vintage book pages and lexical definitions",
     heroImagePhotographer: "Patrick Tomasso",
     heroImagePhotographerUrl: "https://unsplash.com/@impatrickt",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for cracking cryptic crosswords: recognizing anagram indicators and fodder.",
+    excerpt: "Decode 60+ cryptic anagram indicator keywords, separate fodder from definitions, and solve British and American cryptic clues with mechanical precision.",
     leadSummary: "Cryptic crosswords are linguistic puzzles of misdirection, double meanings, and clever anagram indicators. Discover how to identify anagram fodder, recognize subtle indicator keywords, and decode the most fiendish wordplay clues in British, American, and tournament crossword competitions.",
     author: {
       "name": "Elena Vance",
@@ -3396,7 +3401,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Digital communication and mobile devices",
     heroImagePhotographer: "John Schnobrich",
     heroImagePhotographerUrl: "https://unsplash.com/@johnschno",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for spaced repetition for word gamers: how champions memorize 10,000 words with anki.",
+    excerpt: "Step-by-step Leitner and Anki spaced repetition workflows used by national Scrabble champions to commit 10,000 tournament word stems to long-term memory.",
     leadSummary: "Memorizing thousands of tournament words is not an innate gift of photographic memory; it is a science of spaced repetition, flashcard heuristics, and algorithmic memory scheduling. Learn how competitive word game champions utilize Anki, Leitner boxes, and stem taxonomy to master 20,000+ words with zero burnout.",
     author: {
       "name": "Marcus Thorne",
@@ -3521,7 +3526,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Notebook with calendar and strategy notes",
     heroImagePhotographer: "Biegun Wlodzimierz",
     heroImagePhotographerUrl: "https://unsplash.com/@biegun",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for nyt spelling bee mastery: finding the daily pangram and center-letter loops.",
+    excerpt: "Systematic prefix/suffix chaining heuristics to achieve Genius rank daily and spot elusive 7-letter pangrams in the New York Times Spelling Bee.",
     leadSummary: "The New York Times Spelling Bee is a daily masterclass in constrained lexical search. Discover the cognitive frameworks, pangram recognition formulas, and suffix churning methodologies used by elite solvers to reach Genius and Queen Bee status in record time.",
     author: {
       "name": "Maya Lin",
@@ -3535,6 +3540,7 @@ export const blogPosts: BlogPost[] = [
         id: "the-rules-and-scoring-system",
         heading: "The Constraints of the Hive: Mandatory Centers and Pangrams",
         content: [
+          "When navigating strict letter-length boundaries in word challenges, our focused [5-Letter Word Finder](/5-letter-word-finder) helps you discover eligible candidates while adhering to puzzle constraints.",
           "In the NYT Spelling Bee, players are presented with a honeycomb of 7 unique letters: 6 perimeter letters and 1 highlighted center letter. Every valid word must be at least 4 letters long and MUST contain the center letter. Letters can be reused an unlimited number of times.",
           "Scoring is strictly structured: 4-letter words earn 1 point each. Words of 5 or more letters earn 1 point per letter (a 6-letter word scores 6 points, an 8-letter word scores 8).",
           "The holy grail of each puzzle is the 'Pangram'—a word that uses every single one of the 7 unique letters at least once. Pangrams award a massive 7-point bonus in addition to their letter count (a 7-letter pangram earns 14 points, an 8-letter pangram earns 15), providing the scoring engine needed to achieve Genius rank."
@@ -3667,7 +3673,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Word gaming table and competitive counters",
     heroImagePhotographer: "Sean Do",
     heroImagePhotographerUrl: "https://unsplash.com/@seando",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for defensive strategy in scrabble: when to play tight vs opening the board.",
+    excerpt: "Learn when to lock down the board against dangerous high-variance players and when to crack open scoring lanes when trailing by 60+ points.",
     leadSummary: "Offense sells tickets, but defense wins championships. In competitive Scrabble, knowing when to transition from aggressive point accumulation to ironclad board lockdown is the strategic dividing line between reckless gamblers and tournament champions.",
     author: {
       "name": "Elena Vance",
@@ -3808,7 +3814,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Abstract matrix letters and symbols",
     heroImagePhotographer: "Markus Spiske",
     heroImagePhotographerUrl: "https://unsplash.com/@markusspiske",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for 3-letter power words: high-scoring hooks like zuz, qat, suq, and xis.",
+    excerpt: "Master 40+ indispensable 3-letter tournament powerhouses like QAT, SUQ, ZUZ, and XIS to turn tight corners into 50-point parallel plays.",
     leadSummary: "Three-letter words are the versatile workhorses of tournament word play. While two-letter words provide tight parallel connections, three-letter words reach from central board anchors into premium multiplier squares, solving difficult high-consonant racks and unlocking tight board bottlenecks.",
     author: {
       "name": "Marcus Thorne",
@@ -3975,7 +3981,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Letters and typewriter keys in strategic layout",
     heroImagePhotographer: "Florian Klauer",
     heroImagePhotographerUrl: "https://unsplash.com/@florianklauer",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for linguistic intuition: using latin and greek morphemes to guess legal words.",
+    excerpt: "Use etymological prefixes, Latin roots, and Greek combining forms to accurately deduce whether an obscure word is legitimate before playing it.",
     leadSummary: "When playing competitive word games, you will inevitably encounter unfamiliar letter combinations that sound like legitimate words but linger outside your verified memory. Discover how understanding Latin, Greek, and Romance language etymology allows you to make calculated, high-probability word guesses with tournament confidence.",
     author: {
       "name": "Maya Lin",
@@ -4105,7 +4111,7 @@ export const blogPosts: BlogPost[] = [
     heroImageAlt: "Vintage book pages and lexical definitions",
     heroImagePhotographer: "Patrick Tomasso",
     heroImagePhotographerUrl: "https://unsplash.com/@impatrickt",
-    excerpt: "Discover in-depth tournament insights, mathematical models, and practical game rules for family word games: how anagram solvers and letter games accelerate child literacy.",
+    excerpt: "How playful letter scrambling, tactile tile manipulation, and vocabulary games boost phonemic awareness, spelling confidence, and childhood reading fluency.",
     leadSummary: "Word games are among the most powerful pedagogical tools in cognitive development, reading comprehension, and spatial reasoning. Discover how to introduce children and families to Scrabble, Bananagrams, Boggle Junior, and anagram puzzles with scaffolding techniques that cultivate a lifelong love of language without frustration.",
     author: {
       "name": "Elena Vance",
@@ -4119,6 +4125,7 @@ export const blogPosts: BlogPost[] = [
         id: "the-pedagogical-power-of-word-play",
         heading: "Cognitive Benefits: How Word Games Boost Literacy and Memory",
         content: [
+          "Educators and parents can leverage interactive digital scaffolding with our clean [Word Unscrambler](/) to make letter discovery a rewarding, hands-on experience.",
           "Extensive research in cognitive development and educational psychology demonstrates that gamified word play accelerates phonemic awareness, vocabulary acquisition, and morphological decoding far more effectively than rote memorization drills.",
           "When a child physically manipulates letter tiles on a board, multiple sensory modalities are engaged simultaneously: visual recognition of letterforms, tactile kinesthetic arrangement of tiles, and auditory phonological processing as words are sounded out.",
           "Furthermore, word games introduce young learners to spatial reasoning, probability calculation, and strategic thinking in a fun, low-stakes environment that builds resilience and intellectual confidence."
