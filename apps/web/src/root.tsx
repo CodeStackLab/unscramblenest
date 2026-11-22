@@ -48,7 +48,11 @@ export function loader({ request, url }: Route.LoaderArgs) {
 }
 
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
-	return loaderHeaders;
+	const headers = new Headers(loaderHeaders);
+	headers.set("X-Content-Type-Options", "nosniff");
+	headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+	headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+	return headers;
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
