@@ -43,6 +43,12 @@ const httpServer = createServer(app);
 
 app.disable('x-powered-by');
 app.use(compression());
+app.use((_request, response, next) => {
+	response.setHeader('X-Content-Type-Options', 'nosniff');
+	response.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+	response.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+	next();
+});
 app.use((request, response, next) => {
 	if (URL.canParse(request.url, REQUEST_URL_BASE)) {
 		next();

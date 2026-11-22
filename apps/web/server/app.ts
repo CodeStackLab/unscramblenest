@@ -13,6 +13,12 @@ import { realtime as realtimeDefinition } from '@/realtime/handler.server';
 export const app = express();
 
 app.disable('x-powered-by');
+app.use((_request, response, next) => {
+	response.setHeader('X-Content-Type-Options', 'nosniff');
+	response.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+	response.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+	next();
+});
 app.use(
 	createRequestHandler({
 		build: () => import('virtual:react-router/server-build'),

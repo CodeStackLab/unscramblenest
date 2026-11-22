@@ -1,18 +1,6 @@
-/**
- * The site's preferred canonical origin.
- *
- * On the production domain this is always the HTTPS non-www variant
- * (https://unscramblenest.com), regardless of how the request arrived —
- * www or non-www, HTTP or HTTPS. Canonical links, og:url and the sitemap
- * all publish this value so every variant consolidates onto one URL,
- * which is what fixes "duplicate without user-selected canonical".
- *
- * Preview and local hosts fall back to the request origin so dev and the
- * editor preview keep working.
- */
-import { siteOrigin } from '@/lib/site-origin.server';
+import { siteOrigin } from "@/lib/site-origin.server";
 
-const PREFERRED_DOMAIN = 'unscramblenest.com';
+const PREFERRED_DOMAIN = "unscramblenest.com";
 
 export function preferredOrigin(request: Request): string {
 	const { host } = new URL(request.url);
@@ -25,17 +13,33 @@ export function preferredOrigin(request: Request): string {
 }
 
 /**
- * Returns the absolute HTTPS non-www URL to redirect to when the request
- * landed on the www variant of the production domain, preserving the path
- * and query string. Returns null when no redirect is needed (non-www,
- * preview, or local).
+ * Returns the absolute URL to redirect to when:
+ * 1. The request landed on the www variant of the production domain, or
+ * 2. The request has a trailing slash on a non-root path (e.g. /anagram-solver/ -> /anagram-solver).
  *
- * This is a real server-level 301, not a JavaScript redirect: it is emitted
- * by the root loader before any HTML is rendered.
+ * Returns null when no redirect is needed.
+ * Emits a real server-level 301 redirect before any HTML is rendered.
  */
 export function canonicalRedirectUrl(url: URL): string | null {
-	if (url.host !== `www.${PREFERRED_DOMAIN}`) return null;
-	if (url.pathname.startsWith('/.well-known/')) return null;
+	if (url.pathname.startsWith("/.well-known/")) return null;
 
-	return `https://${PREFERRED_DOMAIN}${url.pathname}${url.search}`;
+	const hasTrailingSlash = url.pathname !== "/" && url.pathname.endsWith("/");
+	const cleanPath = hasTrailingSlash ? url.pathname.replace(/\/+$/, "") : url.pathname;
+
+	// WWW to non-WWW redirect (with path normalization)
+	if (url.host === `www.${PREFERRED_DOMAIN}`) {
+		return `https://${PREFERRED_DOMAIN}${cleanPath}${url.search}`;
+	}
+
+	// Trailing slash redirect on production non-WWW
+	if (url.host === PREFERRED_DOMAIN && hasTrailingSlash) {
+		return `https://${PREFERRED_DOMAIN}${cleanPath}${url.search}`;
+	}
+
+	// Trailing slash redirect on local or preview environments
+	if (hasTrailingSlash) {
+		return `${url.origin}${cleanPath}${url.search}`;
+	}
+
+	return null;
 }

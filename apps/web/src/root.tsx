@@ -7,50 +7,38 @@ import {
 	redirect,
 	Scripts,
 	ScrollRestoration,
-} from 'react-router';
-import type { Route } from './+types/root';
-import stylesheet from '@/index.css?url';
-import { preferredOrigin, canonicalRedirectUrl } from '@/lib/preferred-origin.server';
-import { HorizonsPreviewScripts } from './horizons-preview-scripts';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { CookieBanner } from '@/components/cookie-banner';
+	useRouteError,
+} from "react-router";
+import type { Route } from "./+types/root";
+import stylesheet from "@/index.css?url";
+import { preferredOrigin, canonicalRedirectUrl } from "@/lib/preferred-origin.server";
+import { HorizonsPreviewScripts } from "./horizons-preview-scripts";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { CookieBanner } from "@/components/cookie-banner";
 
 export const links: Route.LinksFunction = () => [
-	{ rel: 'stylesheet', href: stylesheet, precedence: 'default' },
-	{ rel: 'icon', href: '/favicon.png', type: 'image/png' },
-	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+	{ rel: "stylesheet", href: stylesheet, precedence: "default" },
+	{ rel: "icon", href: "/favicon.png", type: "image/png" },
+	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
 	{
-		rel: 'preconnect',
-		href: 'https://fonts.gstatic.com',
-		crossOrigin: 'anonymous',
+		rel: "preconnect",
+		href: "https://fonts.gstatic.com",
+		crossOrigin: "anonymous",
 	},
 	{
-		rel: 'stylesheet',
-		href: 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap',
+		rel: "stylesheet",
+		href: "https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap",
 	},
 ];
 
-/**
- * Publishes the site's public origin, which `seo()` reads to build canonical and
- * `og:url` tags, and advertises the sitemap to crawlers that read response
- * headers rather than HTML.
- *
- * A `meta` export can only reach server data through `matches`, and the `headers`
- * export cannot see loader data at all, so both have to travel this way.
- */
 export function loader({ request, url }: Route.LoaderArgs) {
-	// Server-level 301 from the www variant to the preferred HTTPS non-www
-	// domain, preserving the path and query string. Fires only on the
-	// production www host — preview and local hosts are left alone.
 	const redirectTarget = canonicalRedirectUrl(url);
 
 	if (redirectTarget) {
 		return redirect(redirectTarget, { status: 301 });
 	}
 
-	// Always publish the preferred origin so canonical and og:url are
-	// identical whether the page was reached via www or non-www.
 	const origin = preferredOrigin(request);
 
 	return data(
@@ -59,49 +47,59 @@ export function loader({ request, url }: Route.LoaderArgs) {
 	);
 }
 
-/**
- * A page route that exports `headers` replaces this one, so merge `parentHeaders`
- * there rather than returning only that route's own headers.
- */
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
 	return loaderHeaders;
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+	const error = useRouteError();
+	const isError = Boolean(error);
+	const is404 = isRouteErrorResponse(error) && error.status === 404;
+
 	return (
-		// suppressHydrationWarning absorbs attributes injected by browser extensions
-		// and theme scripts before hydration; attribute-only, one element deep. Keep both.
 		<html lang="en" suppressHydrationWarning>
 			<head>
-				<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TQP3MX7P" />
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `window.dataLayer = window.dataLayer || [];
+				{!isError && (
+					<>
+						<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TQP3MX7P" />
+						<script
+							dangerouslySetInnerHTML={{
+								__html: `window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());`,
-					}}
-				/>
+	  gtag("js", new Date());`,
+							}}
+						/>
+					</>
+				)}
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				{isError && (
+					<>
+						<title>{is404 ? "404 — Page Not Found | UnscrambleNest" : "Error | UnscrambleNest"}</title>
+						<meta name="robots" content="noindex, nofollow" />
+					</>
+				)}
 				<Meta />
 				<Links />
 				<HorizonsPreviewScripts />
-				<script
-					async
-					crossOrigin="anonymous"
-					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4107704371063029"
-				/>
+				{!isError && (
+					<script
+						async
+						crossOrigin="anonymous"
+						src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4107704371063029"
+					/>
+				)}
 			</head>
 			<body suppressHydrationWarning>
 				<div id="root">{children}</div>
 				<noscript>
-					<div style={{ padding: '24px', fontFamily: 'sans-serif', textAlign: 'center' }}>
+					<div style={{ padding: "24px", fontFamily: "sans-serif", textAlign: "center" }}>
 						Unscramblenest is a word unscrambler, anagram solver, and 5-letter word finder.
 						The dictionary search runs in your browser and needs JavaScript enabled to work.
 						Please enable JavaScript to find words from your letters.
 					</div>
 				</noscript>
-				<CookieBanner />
+				{!isError && <CookieBanner />}
 				<ScrollRestoration />
 				<Scripts />
 			</body>
@@ -110,28 +108,65 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader /><div id="main-content"><Outlet /></div><SiteFooter /></>;
+	return (
+		<>
+			<a className="skip-link" href="#main-content">
+				Skip to content
+			</a>
+			<SiteHeader />
+			<div id="main-content">
+				<Outlet />
+			</div>
+			<SiteFooter />
+		</>
+	);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-	const isClientErrorResponse = isRouteErrorResponse(error) && error.status < 500;
-
-	if (import.meta.env.DEV && !isClientErrorResponse) {
-		return null;
-	}
-
-	let message = 'Oops!';
-	let details = 'An unexpected error occurred.';
+	const is404 = isRouteErrorResponse(error) && error.status === 404;
+	let title = "Oops! An error occurred";
+	let message = "An unexpected error occurred while loading this page.";
 
 	if (isRouteErrorResponse(error)) {
-		message = error.status === 404 ? '404' : 'Error';
-		details = error.status === 404 ? 'The requested page could not be found.' : error.statusText || details;
+		if (error.status === 404) {
+			title = "404 — Page Not Found";
+			message = "The page or word search you requested could not be found. It may have moved or been updated.";
+		} else {
+			title = `${error.status} — ${error.statusText || "Application Error"}`;
+			message = String(error.data || message);
+		}
 	}
 
 	return (
-		<main>
-			<h1>{message}</h1>
-			<p>{details}</p>
-		</main>
+		<>
+			<a className="skip-link" href="#main-content">
+				Skip to content
+			</a>
+			<SiteHeader />
+			<main id="main-content" className="info-main" style={{ textAlign: "center", padding: "64px 20px 80px" }}>
+				<span className="eyebrow">UNSCRAMBLENEST / ERROR</span>
+				<h1 style={{ fontSize: "36px", margin: "16px 0 12px" }}>{title}</h1>
+				<p className="info-intro" style={{ margin: "0 auto 28px", maxWidth: "580px" }}>
+					{message}
+				</p>
+				<div style={{ display: "flex", justifyContent: "center", gap: "14px", flexWrap: "wrap" }}>
+					<a
+						href="/"
+						className="primary-button"
+						style={{ display: "inline-flex", alignItems: "center", textDecoration: "none", padding: "12px 24px", minHeight: "44px" }}
+					>
+						Return to Word Unscrambler
+					</a>
+					<a
+						href="/anagram-solver"
+						className="pagination-btn"
+						style={{ minHeight: "44px", padding: "12px 20px", display: "inline-flex", alignItems: "center" }}
+					>
+						Try Anagram Solver
+					</a>
+				</div>
+			</main>
+			<SiteFooter />
+		</>
 	);
 }

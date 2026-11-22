@@ -19,6 +19,7 @@ services:
       - "traefik.http.routers.preview-unscramble-http.rule=Host(`unscramblenest.com`) || Host(`www.unscramblenest.com`) || Host(`preview.unscramblenest.com`)"
       - "traefik.http.routers.preview-unscramble-http.middlewares=preview-redirect-to-https"
       - "traefik.http.middlewares.preview-redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.preview-redirect-to-https.redirectscheme.permanent=true"
       - "traefik.http.routers.preview-unscramble-https.entryPoints=https"
       - "traefik.http.routers.preview-unscramble-https.rule=Host(`unscramblenest.com`) || Host(`preview.unscramblenest.com`)"
       - "traefik.http.routers.preview-unscramble-https.tls=true"

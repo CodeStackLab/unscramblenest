@@ -50,18 +50,15 @@ export function isConsentGranted(category: CookieConsentCategory): boolean {
 export function saveConsent({
 	analytics,
 	marketing,
-	platformAnalytics,
 }: {
 	analytics: boolean;
 	marketing: boolean;
-	platformAnalytics: boolean;
 }): void {
 	const isFirstDecision = !hasConsentDecision();
 	const categories: CookieConsentCategory[] = [
 		CookieConsentCategory.Necessary,
 		...(analytics ? [CookieConsentCategory.Analytics] : []),
 		...(marketing ? [CookieConsentCategory.Marketing] : []),
-		...(platformAnalytics ? [CookieConsentCategory.PlatformAnalytics] : []),
 	];
 	const value = encodeURIComponent(JSON.stringify({ categories, consentTimestamp: new Date().toISOString() }));
 
@@ -73,11 +70,11 @@ export function saveConsent({
 }
 
 export function acceptAllCookies(): void {
-	saveConsent({ analytics: true, marketing: true, platformAnalytics: true });
+	saveConsent({ analytics: true, marketing: true });
 }
 
 export function rejectOptionalCookies(): void {
-	saveConsent({ analytics: false, marketing: false, platformAnalytics: false });
+	saveConsent({ analytics: false, marketing: false });
 }
 
 /** Reopens the preferences for a "Cookie settings" link, typically in the footer. */

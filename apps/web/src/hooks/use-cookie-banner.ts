@@ -12,19 +12,16 @@ import {
 export type CookieChoices = {
 	analytics: boolean;
 	marketing: boolean;
-	platformAnalytics: boolean;
 };
 
 const NO_OPTIONAL_COOKIES: CookieChoices = {
 	analytics: false,
 	marketing: false,
-	platformAnalytics: false,
 };
 
 const grantedChoices = (): CookieChoices => ({
 	analytics: isConsentGranted(CookieConsentCategory.Analytics),
 	marketing: isConsentGranted(CookieConsentCategory.Marketing),
-	platformAnalytics: isConsentGranted(CookieConsentCategory.PlatformAnalytics),
 });
 
 /**

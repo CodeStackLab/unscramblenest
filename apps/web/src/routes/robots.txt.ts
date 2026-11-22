@@ -79,9 +79,16 @@ const CONTENT_SIGNAL = 'Content-Signal: search=yes, ai-input=yes, ai-train=no';
 
 function publishedRules(origin: string): string[] {
 	return [
+		'User-agent: Mediapartners-Google',
+		'Allow: /',
+		'',
 		'User-agent: *',
 		CONTENT_SIGNAL,
 		'Allow: /',
+		'Disallow: /api/',
+		'Disallow: /ws',
+		'Disallow: /client-report.html',
+		'Disallow: /report/',
 		'',
 		...AI_ANSWER_AGENTS.flatMap(agent => [`User-agent: ${agent}`, CONTENT_SIGNAL, 'Allow: /', '']),
 		...AI_TRAINING_AGENTS.flatMap(agent => [`User-agent: ${agent}`, 'Disallow: /', '']),

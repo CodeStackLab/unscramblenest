@@ -60,7 +60,9 @@ export const absoluteUrl = (origin: string, target: string): string => {
 
 export function seo({ matches, location }: SeoArgs, input: SeoInput): MetaDescriptor[] {
 	const origin = siteOriginFrom(matches);
-	const canonical = absoluteUrl(origin, input.path ?? location.pathname);
+	const rawPath = input.path ?? location.pathname;
+	const cleanPath = rawPath !== "/" ? rawPath.replace(/\/+$/, "") : "/";
+	const canonical = absoluteUrl(origin, cleanPath);
 	const imageUrl = input.image ? absoluteUrl(origin, input.image) : '';
 
 	const tags: MetaDescriptor[] = [
