@@ -13,6 +13,11 @@ export function loader({ params }: Route.LoaderArgs) {
     return redirect("/terms-of-use", { status: 301 });
   }
 
+  // Canonicalize privacy aliases to /privacy-policy
+  if (normalized === "privacy") {
+    return redirect("/privacy-policy", { status: 301 });
+  }
+
   // Normalize case (e.g. /About -> /about)
   if (rawPage !== normalized) {
     return redirect(`/${normalized}`, { status: 301 });
